@@ -1,0 +1,23 @@
+/* Style to Liquid Galaxy - Aquarium */
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+h1{
+    font-family: 'Roboto', sans-serif;
+    text-align:center;
+}
+h2{
+    font-family: 'Roboto', sans-serif;
+    text-align:center;
+}
+body{
+    background-color: antiquewhite;
+}
+
+.inputSwitch{
+    font-family: 'Roboto', sans-serif;
+}
+
+.inputSwitch span{
+    font-family: 'Roboto', sans-serif;
+    font-style: italic;
+    color: #0645AD;
+}
