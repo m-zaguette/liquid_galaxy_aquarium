@@ -1,0 +1,9 @@
+{
+   "name": "socket-liquid_galaxy_aquarium",
+   "version": "0.0.1",
+   "description": "Project develop to course Web Development at Facens",
+   "dependencies": {
+      "express": "^4.17.1",
+      "socket.io": "^4.2.0"
+   }
+}
