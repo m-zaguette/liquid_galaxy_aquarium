@@ -5,21 +5,34 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
 
-app.get('/', (req, res) => {  res.sendFile(__dirname + '/index.html');
+const filePath = "/public"; // Do not add '/' at the end
+const controllerFile = "controller/index.html";
+
+
+app.get('/:id', (req, res) => {
+    const id = req.params.id;
+    if(id == "controller"){
+        res.sendFile(__dirname + `${filePath}/${controllerFile}`);
+    }else{
+        screenNumber = id;
+        res.sendFile(__dirname + '/index.html');
+    }
 });
 
 io.on('connection', (socket) => {
     socket.broadcast.emit('hi');
 
     socket.on('chat message', (msg) => {
-        io.emit('chat message', msg);  
+        io.emit('chat message', msg);
     });
 
-    socket.on('chat message', (msg) => {
-        console.log('message: ' + msg);
-    });
+    // socket.on('chat message', (msg) => {
+    //     console.log('message: ' + msg);
+    //     console.log('__dirname ' + __dirname);
+    //     console.log('filePath ' + filePath);
+    // });
 
-    console.log('a user connected');
+    console.log(`A user connected with id ${socket.id}`);
 
     socket.on('disconnect', () => {    
       console.log('user disconnected');  

@@ -18,9 +18,8 @@
     <link rel="icon" type="image/png" sizes="32x32" href="4ed87dde8070b6438c0ecc65780c1084.ico/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="4ed87dde8070b6438c0ecc65780c1084.ico/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="4ed87dde8070b6438c0ecc65780c1084.ico/favicon-16x16.png">
-    <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="script.js"></script>
+    <script src="index.js"></script>
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="4ed87dde8070b6438c0ecc65780c1084.ico/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
@@ -38,6 +37,7 @@
     </div>
     
     <script>
+        console.log("Inside draw-index.html file");
         var $inputSwitches = $(".inputSwitch"),
         $inputs = $inputSwitches.find("input"),
         $spans = $inputSwitches.find("span");
@@ -61,6 +61,53 @@
             }
         }
         }).hide();
+
+        loaded = true;
+        function loadYoutubeVideo(){
+            loaded = false;
+            console.log("Entrou no loadYoutubeVideo");
+            var videoURL = $("#videoURL").val();
+            console.log("videoURL: "+videoURL);
+            if(videoURL == "URL"){
+                alert("Insira uma URL válida");
+            }else if(!loaded){
+                const videoID = getId(videoURL);
+                var src = "https://www.youtube.com/embed/" + videoID;
+                console.log(src);
+                loaded = true;
+                var video = document.getElementById("videoDisplay");
+                video.style.display = "block";
+                video.src = src;
+                var displayConfig = viewport();
+                video.width = displayConfig.width*0.98;
+                video.height = displayConfig.height*0.98;
+            }else{
+                alert("Seu video está sendo carregado!");
+            }
+            
+        }
+
+        function viewport()
+        {
+            var e = window
+            , a = 'inner';
+            if ( !( 'innerWidth' in window ) )
+            {
+            a = 'client';
+            e = document.documentElement || document.body;
+            }
+            return { width : e[ a+'Width' ] , height : e[ a+'Height' ] }
+        }
+
+        function getId(url) {
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+            const match = url.match(regExp);
+
+            return (match && match[2].length === 11)
+            ? match[2]
+            : null;
+        }
+
     </script>
 </body>
 </html>

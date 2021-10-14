@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Socket.IO chat</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Aquarium</title>
         <style>
             body {
                 margin: 0;
@@ -57,6 +60,7 @@
         <form id="form" action=""><input id="input" autocomplete="off" /><button>Send</button></form>
         <script src="/socket.io/socket.io.js"></script>
         <script>
+            console.log("Inside index.html file");
             var socket = io();
 
             var messages = document.getElementById('messages');
