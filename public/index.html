@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Aquarium</title>
+        <title>Aquarium - Video</title>
         <style>
             body {
                 margin: 0;
@@ -60,7 +60,6 @@
         <form id="form" action=""><input id="input" autocomplete="off" /><button>Send</button></form>
         <script src="/socket.io/socket.io.js"></script>
         <script>
-            console.log("Inside index.html file");
             var socket = io();
 
             var messages = document.getElementById('messages');
@@ -77,6 +76,14 @@
             socket.on('chat message', function(msg) {
                 var item = document.createElement('li');
                 item.textContent = msg;
+                messages.appendChild(item);
+                window.scrollTo(0, document.body.scrollHeight);
+            });
+
+            socket.on('video-url', function(videoUrl){
+                console.log(`Dentro do socket.on video-url com link ${videoUrl}`);
+                var item = document.createElement('li');
+                item.textContent = videoUrl;
                 messages.appendChild(item);
                 window.scrollTo(0, document.body.scrollHeight);
             });
