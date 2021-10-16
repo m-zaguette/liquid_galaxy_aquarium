@@ -4,7 +4,6 @@ let nScreens;
 const readyButton = document.getElementById('ready-btn')
 
 //Import URL to Youtube Video    
-console.log("Inside main.js file");
 var $inputSwitches = $(".inputSwitch"),
 $inputs = $inputSwitches.find("input"),
 $spans = $inputSwitches.find("span");
@@ -33,15 +32,12 @@ if (e.which == 9) {
 var loaded = true;
 function loadYoutubeVideo(){
     loaded = false;
-    console.log("Entrou no loadYoutubeVideo");
     var videoURL = $("#videoURL").val();
-    console.log("videoURL: "+videoURL);
     if(videoURL == "URL"){
         alert("Insira uma URL válida");
     }else if(!loaded){
         const videoID = getId(videoURL);
         var src = "https://www.youtube.com/embed/" + videoID;
-        console.log(src);
         loaded = true;
         var video = document.getElementById("videoDisplay");
         video.style.display = "block";
@@ -54,6 +50,7 @@ function loadYoutubeVideo(){
         alert("Seu video está sendo carregado!");
     }
 }
+readyButton.addEventListener('click', loadYoutubeVideo);
 
 function viewport()
 {
@@ -78,17 +75,15 @@ function getId(url) {
 
 function setVideoReady(videoUrl) {
     socket.emit('controller-video-ready', videoUrl)
-    socket.emit('video-url', videoUrl)
 }
 
-readyButton.addEventListener('click', loadYoutubeVideo);
 
 // socket functions/event listeners
 /**
  * Screen setup method -> responsible for setting variables for screen
  * @param {Object} screen screen object containing info like screen number and total of screens
  */
- function screenSetup(screen) {
+function screenSetup(screen) {
     nScreens = screen.nScreens;
 }
 socket.on("new-screen", screenSetup)
