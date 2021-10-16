@@ -82,3 +82,13 @@ function setVideoReady(videoUrl) {
 }
 
 readyButton.addEventListener('click', loadYoutubeVideo);
+
+// socket functions/event listeners
+/**
+ * Screen setup method -> responsible for setting variables for screen
+ * @param {Object} screen screen object containing info like screen number and total of screens
+ */
+ function screenSetup(screen) {
+    nScreens = screen.nScreens;
+}
+socket.on("new-screen", screenSetup)

@@ -7,8 +7,11 @@ const io = new Server(server);
 
 const filePath = "/public"; // Do not add '/' at the end
 const controllerFile = "controller/index.html";
-const videoFile = "/index.html";
+const videoFile = "video/index.html";
 var ids = [];
+var screenNumber = 1;
+var myArgs = process.argv.slice(2);
+var nScreens = Number(myArgs[0]);
 
 app.use(express.static(__dirname + filePath));
 
@@ -32,6 +35,7 @@ io.on('connection', (socket) => {
     });
 
     console.log(`A user connected with id ${socket.id}`);
+    socket.emit("new-screen", { number: Number(screenNumber), nScreens: nScreens })
     ids.push(socket.id);
 
     socket.on('disconnect', () => {    
@@ -98,7 +102,7 @@ io.on('connection', (socket) => {
 
     socket.on('video-url', (videoUrl) => {
         console.log('Recebido emissao do videoUrl');
-        io.emit('video-url', videoUrl);
+        // io.emit('video-url', videoUrl);
     })
 });
 
