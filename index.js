@@ -86,13 +86,13 @@ io.on('connection', (socket) => {
 
     /**
      * On Player Ready Mehtod -> responsible for checking if all players are ready and emitting to all sockets when they are
-     * @param {String} videoUrl id of the player
+     * @param {String} videoId id of the player
      */
-    function controllerVideoReady(videoUrl) {
-        logMessage(`Controller Video Ready inside index.js for video ${videoUrl}`);
+    function controllerVideoReady(videoId) {
+        logMessage(`Controller Video Ready inside index.js for video id ${videoId}`);
         controllerId = socket.id;
-        onVideoReady(socket.id, "controller");
-        io.emit('video-url',videoUrl);
+        onVideoReady(socket.id);
+        io.emit('video-url',videoId);
     }
     socket.on('controller-video-ready', controllerVideoReady)
 

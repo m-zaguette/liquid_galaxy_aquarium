@@ -39,13 +39,13 @@ function loadYoutubeVideo(){
         const videoID = getId(videoURL);
         var src = "https://www.youtube.com/embed/" + videoID;
         loaded = true;
-        var video = document.getElementById("videoDisplay");
-        video.style.display = "block";
-        video.src = src;
-        var displayConfig = viewport();
-        video.width = displayConfig.width*0.98;
-        video.height = displayConfig.height*0.98;
-        setVideoReady(src);
+        // var video = document.getElementById("videoDisplay");
+        // video.style.display = "block";
+        // video.src = src;
+        // var displayConfig = viewport();
+        // video.width = displayConfig.width*0.98;
+        // video.height = displayConfig.height*0.98;
+        setVideoReady(videoID);
     }else{
         alert("Seu video está sendo carregado!");
     }
@@ -73,8 +73,8 @@ function getId(url) {
     : null;
 }
 
-function setVideoReady(videoUrl) {
-    socket.emit('controller-video-ready', videoUrl)
+function setVideoReady(videoId) {
+    socket.emit('controller-video-ready', videoId)
 }
 
 

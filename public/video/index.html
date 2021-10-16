@@ -24,12 +24,18 @@
         </style>
     </head>
     <body>
-        <div id="video">
-            <iframe id="videoDisplay" style="display: none;"></iframe>
+        <div id="player">
+            <!-- <iframe id="videoDisplay" style="display: none;"></iframe> -->
         </div>
-        <button id="watch-btn">Assistir!</button>
+        <div id="controllers">
+            <button id="watch-btn">Assistir!</button>
+            <button id="play-btn">Play!</button>
+            <button id="pause-btn">Pause!</button>
+        </div>
+        
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="/socket.io/socket.io.js"></script>
+        <script src="https://www.youtube.com/iframe_api"></script>
         <script type="module" src='../video/videoplayer.js'></script>
     </body>
 </html>
