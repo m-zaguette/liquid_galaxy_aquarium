@@ -24,17 +24,17 @@ function onYouTubeIframeAPIReady(videoId){
     var displayConfig = viewport();
     player = new YT.Player('player', {
         height: `${displayConfig.height*0.98}`,
-        width: `${displayConfig.width*0.98}`,
+        width: `${displayConfig.width*1.96}`,
         videoId: `${videoId}`,
         events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
+            'onReady': onPlayerReady
         }
     });
 }
 
 function onPlayerReady(event) {
     event.target.playVideo();
+    event.target.pauseVideo();
 }
 
 function onPlayerStateChange(event) {
@@ -49,34 +49,52 @@ function stopVideo() {
     player.stopVideo();
 }
 
+function requestPauseVideo(){
+    socket.emit('log-message', `Resquested by Id: ${socket.id} to pause the video`);
+    socket.emit('pause-request');
+}
+
 function pauseVideo(){
     player.pauseVideo();
+}
+
+function requestPlayVideo(){
+    socket.emit('log-message', `Resquested by Id: ${socket.id} to play the video`);
+    socket.emit('play-request');
 }
 
 function playVideo(){
     player.playVideo();
 }
 
-socket.on('video-url', (videoId) => {
-    
-    socket.emit('log-message','Dentro de videoplayer.js executando video-url');
-    onYouTubeIframeAPIReady(videoId);
-    // var video = document.getElementById("videoDisplay");
-    // video.style.display = "block";
-    // video.src = videoUrl;
-    // // + "?autoplay=1";
-    // var displayConfig = viewport();
-    // video.width = displayConfig.width*0.25;
-    // video.height = displayConfig.height*0.25;
-    // // window.scrollTo(0, document.body.scrollHeight);
+socket.on('video-url', objectId => {
+    let screen = 0;
+    for(let i=0; i< objectId.ids.length; i++){
+        if((objectId.ids[i][0]) == socket.id){
+            screen = i;
+        }
+    }
+    onYouTubeIframeAPIReady(objectId.videoId);
     watchButton.style.display = "block";
     playButton.style.display = "block";
     pauseButton.style.display = "block";
+    if(screen == 1){
+        window.scrollTo(0, 0);
+    }else{
+        window.scrollTo(10000, 0);
+    }
 });
 
 socket.on('all-videos-ready', ()=>{
-    var video = document.getElementById("videoDisplay");
-    video.src += "?autoplay=1";
+    playVideo();
+});
+
+socket.on('pause-all', () => {
+    pauseVideo();
+});
+
+socket.on('play-all', () => {
+    playVideo();
 });
 
 function setVideoPlayerReady(){
@@ -85,5 +103,5 @@ function setVideoPlayerReady(){
 }
 watchButton.addEventListener('click', setVideoPlayerReady);
 
-playButton.addEventListener('click', playVideo);
-pauseButton.addEventListener('click', pauseVideo);
+playButton.addEventListener('click', requestPlayVideo);
+pauseButton.addEventListener('click', requestPauseVideo);

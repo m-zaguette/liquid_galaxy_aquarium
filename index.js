@@ -68,8 +68,8 @@ io.on('connection', (socket) => {
     }
 
      /**
-     * On Player Ready Mehtod -> responsible for checking if all players are ready and emitting to all sockets when they are
-     * @param {String} id id of the player
+     * On Video-Player Ready Mehtod -> responsible for checking if all Video-players are ready and emitting to all sockets when they are
+     * @param {String} id id of the video-player
      */
       function onVideoReady(id) {
         ids.forEach((item)=>{
@@ -79,22 +79,38 @@ io.on('connection', (socket) => {
                 item[1] = false;
             }
         });
-        console.log(ids);
         checkAllVideoReady();
     }
     socket.on('player-video-ready', onVideoReady)
 
     /**
-     * On Player Ready Mehtod -> responsible for checking if all players are ready and emitting to all sockets when they are
-     * @param {String} videoId id of the player
+     * On Controller Ready Mehtod
+     * @param {String} videoId id of the controller video player
      */
+    
     function controllerVideoReady(videoId) {
         logMessage(`Controller Video Ready inside index.js for video id ${videoId}`);
         controllerId = socket.id;
+        var id = [];
+        ids.forEach(item =>{
+            if(item[0]!=socket.id){
+                id.push(item[0]);
+            }
+        }); 
         onVideoReady(socket.id);
-        io.emit('video-url',videoId);
+        io.emit('video-url',{videoId: videoId , ids: ids});
     }
     socket.on('controller-video-ready', controllerVideoReady)
+
+    function pauseAll(){
+        io.emit('pause-all')
+    }
+    socket.on('pause-request',pauseAll)
+
+    function playAll(){
+        io.emit('play-all')
+    }
+    socket.on('play-request',playAll)
 
 
    

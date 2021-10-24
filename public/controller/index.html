@@ -10,8 +10,8 @@
 <body>
     <h2>Liquid Galaxy - Aquarium</h2>
     <div class="inputSwitch">
-        Youtube Link Vídeo para teste(https://www.youtube.com/watch?v=jfaycN6SbEQ&t): <span>URL</span>
-        <input id="videoURL" value="URL" />
+        Youtube Link Vídeo:
+        <input id="videoURL" placeholder="Insert URL Here" />
         <!-- <button type="button" onclick="loadYoutubeVideo()">Carregar</button> -->
     </div>
     <button id="ready-btn">Carregar</button>
@@ -19,7 +19,6 @@
         <iframe id="videoDisplay" style="display: none;"></iframe>
     </div>
 </body>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script type="module" src='../controller/main.js'></script>
 </html>

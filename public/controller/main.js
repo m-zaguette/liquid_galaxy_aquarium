@@ -3,48 +3,16 @@ let nScreens;
 
 const readyButton = document.getElementById('ready-btn')
 
-//Import URL to Youtube Video    
-var $inputSwitches = $(".inputSwitch"),
-$inputs = $inputSwitches.find("input"),
-$spans = $inputSwitches.find("span");
-$spans.on("click", function() {
-var $this = $(this);
-$this.hide().siblings("input").show().focus().select();
-}).each( function() {
-var $this = $(this);
-$this.text($this.siblings("input").val());
-});
-$inputs.on("blur", function() {
-var $this = $(this);
-$this.hide().siblings("span").text($this.val()).show();
-}).on('keydown', function(e) {
-if (e.which == 9) {
-    e.preventDefault();
-    if (e.shiftKey) {
-    $(this).blur().parent().prevAll($inputSwitches).first().find($spans).click();
-    } else {
-    $(this).blur().parent().nextAll($inputSwitches).first().find($spans).click();
-    }
-}
-}).hide();
-// End Import URL to Youtube Video
 
 var loaded = true;
 function loadYoutubeVideo(){
     loaded = false;
-    var videoURL = $("#videoURL").val();
+    var videoURL = document.getElementById("videoURL").value;
     if(videoURL == "URL"){
         alert("Insira uma URL válida");
     }else if(!loaded){
         const videoID = getId(videoURL);
-        var src = "https://www.youtube.com/embed/" + videoID;
         loaded = true;
-        // var video = document.getElementById("videoDisplay");
-        // video.style.display = "block";
-        // video.src = src;
-        // var displayConfig = viewport();
-        // video.width = displayConfig.width*0.98;
-        // video.height = displayConfig.height*0.98;
         setVideoReady(videoID);
     }else{
         alert("Seu video está sendo carregado!");
