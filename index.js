@@ -72,13 +72,22 @@ io.on('connection', (socket) => {
      * @param {String} id id of the video-player
      */
       function onVideoReady(id) {
-        ids.forEach((item)=>{
-            if(item[0]==id){
-                item[1] = true;
-            }else if(controllerId == id){
-                item[1] = false;
+            if(controllerId == id){
+                ids.forEach((item)=>{
+                    if(item[0] != id){
+                        item[1] = false;
+                    }else{
+                        item[1] = true;
+                    }
+                });
             }
-        });
+            else{
+                ids.forEach((item)=>{
+                if(item[0]==id){
+                    item[1] = true;
+                }
+                });
+            }        
         checkAllVideoReady();
     }
     socket.on('player-video-ready', onVideoReady)
@@ -91,12 +100,6 @@ io.on('connection', (socket) => {
     function controllerVideoReady(videoId) {
         logMessage(`Controller Video Ready inside index.js for video id ${videoId}`);
         controllerId = socket.id;
-        var id = [];
-        ids.forEach(item =>{
-            if(item[0]!=socket.id){
-                id.push(item[0]);
-            }
-        }); 
         onVideoReady(socket.id);
         io.emit('video-url',{videoId: videoId , ids: ids});
     }
