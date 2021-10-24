@@ -40,6 +40,9 @@ Para acessar o controlador:
 localhost:3000/controller
 ```
 
+### Agradecimentos
+Gostaria de agradecer ao professor [Marc Gonzalez Capdevila](https://www.linkedin.com/in/marcgonzalezcapdevila/) por suas aulas direcionando o desenvolvimento e mostrando diversas ferramentas. Também gostaria de agradecer ao repositório usado como fonte de consulta e aprendizado disponibilizado pelo [Leonardo Ruas](https://www.linkedin.com/in/leonardo-ruas/). Seu projecto [Galaxy Pacman](https://github.com/LiquidGalaxyLAB/galaxy-pacman) foi inspirador e extremamente divertido em horas vagas.
+
 # 🐟 Liquid Galaxy - Aquarium
 
 #### EN
@@ -81,3 +84,6 @@ To access the controller:
 ```bash
 localhost:3000/controller
 ```
+
+### Acknowledgment
+I would like to thank the Teacher [Marc Gonzalez Capdevila](https://www.linkedin.com/in/marcgonzalezcapdevila/) for his classes and showing us the tools for web development. I would also like to  thank [Leonardo Ruas](https://www.linkedin.com/in/leonardo-ruas/) for the repository used as source of learning [Galaxy Pacman](https://github.com/LiquidGalaxyLAB/galaxy-pacman).
